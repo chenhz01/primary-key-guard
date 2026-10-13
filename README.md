@@ -2,6 +2,8 @@
 
 Catch primary-key drift before bad IDs reach your database. Declare one regex pattern (plus optional case rule) per table, point it at a JSONL batch, and get per-table drift counts — format, case, duplicates, unknown tables, empty IDs — with samples and a CI-gateable drift percentage. Pure Python, standard library only, zero network.
 
+<p align="center"><img src="docs/demo.gif" alt="demo" width="720"></p>
+
 ## Problem
 
 ID formats drift the moment nobody is watching: someone concatenates without the prefix, a legacy importer writes lowercase, a queue retry duplicates a key. Each violation is individually harmless-looking and collectively expensive — they surface months later as foreign-key breaks, deduplication migrations, or "user not found" tickets. Schema-level constraints catch most of this at the database, but batch pipelines and data-migration jobs read files long before (or instead of) touching the schema. The format decision should be written down once and checked everywhere data is produced.
